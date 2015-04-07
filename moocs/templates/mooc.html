@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+
+
+{% block content %}
+    <script src="{% static 'moocs/load_info.js' %}"></script>
+    <div class="row">
+        <div class="large-8 columns">
+            <h2>{{ mooc.title }}</h2><p></p>
+            {{ mooc.description_short|safe }}
+        </div>
+        <div class="large-4 columns">
+            <p></p><img src="{% static mooc.university.image_address %}" alt="logo" width="300"/><p></p>
+        </div>
+    </div>
+    <hr>
+
+    <div class="row">
+        <div class="large-9 columns">
+            <p><h3>Описание курса:</h3></p>
+            <a onclick="loadDescriptionFull()" href="#">Показать польностью</a>
+            <p><h3>Программа курса:</h3></p>
+            {{ mooc.curriculum|safe }}
+        </div>
+        <div class="large-3 columns">
+            Начало курса
+            <p><em>{{ mooc.begin_date }}</em></p>
+            Конец курса
+            <p><em>{{ mooc.end_date }}</em></p>
+            Нагрузка<p><em>{{ mooc.workload }} ч./нед.</em></p>
+            Преподаватели
+            <p><em>{{ mooc.lector }}</em></p>
+            Язык курса
+            <em><p>{{ mooc.language.language_name }}</p></em>
+            Субтитры
+            <em>
+                <ul class="square">
+                    {% for sub in mooc.subtitles.all %}
+                        <li>{{ sub.language_name }}</li>
+                    {% endfor %}
+                </ul>
+            </em>
+            <a class="button" href="#">Подписаться</a>
+        </div>
+    </div>
+{% endblock %}
+
+{% block backbutton %}
+    <a href='{% url 'index' %}'>Все курсы</a>
+{% endblock %}

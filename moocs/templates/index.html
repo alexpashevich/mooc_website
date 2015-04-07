@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+
+{% block content %}
+    Курсы:
+    <ul>
+        {% for mooc in moocs %}
+        <li><a href='{% url 'mooc' mooc.id %}'>Курс "{{ mooc.title }}"</a></li>
+        {% endfor %}
+    </ul>
+{% endblock %}

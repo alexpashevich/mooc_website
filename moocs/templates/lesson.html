@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h2>Урок {{ lesson.number }}: {{ lesson.title }}</h1>
+            {{ lesson.description|safe }}
+    <hr>
+    <div class="row">
+        <div class="large-9 columns">
+            <p></p><p>Модули:</p>
+            <ol>
+                {% for module in modules %}
+                <li><a href='{% url 'module' module.id %}'>{{ module.text }}</a></li>
+                {% endfor %}
+            </ol>
+        </div>
+        <div class="large-3 columns">.three</div>
+    </div>
+
+    
+
+
+{% endblock %}
+{% block backbutton %}
+    <a href='{% url 'mooc' lesson.mooc.id %}'>{{ lesson.mooc.title }}</a>
+{% endblock %}
